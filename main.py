@@ -4,7 +4,7 @@ from telebot import types
 bot = telebot.TeleBot('6288331035:AAHbLOrsOzsh461YLODeUg-RpG3rpgnYBBc')
 
 import pandas as pd
-data_reviews = pd.read_csv('C:\Users\мвм\Downloads\ext_for_ML.csv')
+data_reviews = pd.read_csv('C:/Users/мвм/Downloads/ext_for_ML.csv')
 data_reviews = data_reviews.drop(columns=["id"])
 
 
