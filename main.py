@@ -10,10 +10,10 @@ data_reviews = data_reviews.drop(columns=["id"])
 
 import nltk
 import re
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 #import pymorphy2
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
@@ -21,7 +21,7 @@ from sklearn.linear_model import LogisticRegression
 
 lemmatize = nltk.WordNetLemmatizer()
 #morph = pymorphy2.MorphAnalyzer()
-ru_stopwords = stopwords.words('russian')
+#ru_stopwords = stopwords.words('russian')
 
 new_text = []
 for i in data_reviews.text:
@@ -30,7 +30,7 @@ for i in data_reviews.text:
     # токенизируем слова
     text = nltk.word_tokenize(text, language="russian")
     # лемматирзируем слова
-    text = [word for word in text if (word not in ru_stopwords)]
+    #text = [word for word in text if (word not in ru_stopwords)]
     #text = [morph.normal_forms(word) for word in text if (word not in ru_stopwords)]
     # соединяем слова
     strin = ' '.join(text)
@@ -60,7 +60,7 @@ print(logreg.score(x_test,y_test))
 def emotional_coloring(text):
     test_text_1 = re.sub("[^a-zA-Zа-яА-Я]"," ", text)
     test_text_2 = nltk.word_tokenize(test_text_1,language = "russian")
-    test_text_3 = [word for word in test_text_2 if (word not in ru_stopwords)]
+    #test_text_3 = [word for word in test_text_2 if (word not in ru_stopwords)]
     #test_text_3 = [morph.normal_forms(word) for word in test_text_2 if (word not in ru_stopwords)]
     """
     strin_2 = ""
