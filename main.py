@@ -59,14 +59,15 @@ print(logreg.score(x_test,y_test))
 def emotional_coloring(text):
     test_text_1 = re.sub("[^a-zA-Zа-яА-Я]"," ", text)
     test_text_2 = nltk.word_tokenize(test_text_1,language = "russian")
-    test_text_3 = [morph.normal_forms(word) for word in test_text_2 if (word not in ru_stopwords)]
+    test_text_3 = [word for word in test_text_2 if (word not in ru_stopwords)]
+    #test_text_3 = [morph.normal_forms(word) for word in test_text_2 if (word not in ru_stopwords)]
     """
     strin_2 = ""
     for i in test_text_3:
         for j in i:
             strin_2 = strin_2 + " " + j
     """
-    strin_2 = ' '.join(text)
+    strin_2 = ' '.join(test_text_3)
     strin_2 = strin_2.strip()
     new_list = []
     new_list.append(strin_2)
