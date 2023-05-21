@@ -12,7 +12,7 @@ import nltk
 import re
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
-import pymorphy2
+#import pymorphy2
 from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -20,7 +20,7 @@ from sklearn.linear_model import LogisticRegression
 
 
 lemmatize = nltk.WordNetLemmatizer()
-morph = pymorphy2.MorphAnalyzer()
+#morph = pymorphy2.MorphAnalyzer()
 ru_stopwords = stopwords.words('russian')
 
 new_text = []
