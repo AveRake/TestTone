@@ -30,7 +30,8 @@ for i in data_reviews.text:
     # токенизируем слова
     text = nltk.word_tokenize(text, language="russian")
     # лемматирзируем слова
-    text = [morph.normal_forms(word) for word in text if (word not in ru_stopwords)]
+    text = [word for word in text if (word not in ru_stopwords)]
+    #text = [morph.normal_forms(word) for word in text if (word not in ru_stopwords)]
     # соединяем слова
     strin = ' '.join(text)
     new_text.append(strin.strip())
