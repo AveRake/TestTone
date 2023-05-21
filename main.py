@@ -9,6 +9,7 @@ data_reviews = data_reviews.drop(columns=["id"])
 
 
 import nltk
+nltk.download('punkt')
 import re
 #from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
@@ -19,7 +20,7 @@ from sklearn.linear_model import LogisticRegression
 
 
 
-lemmatize = nltk.WordNetLemmatizer()
+#lemmatize = nltk.WordNetLemmatizer()
 #morph = pymorphy2.MorphAnalyzer()
 #ru_stopwords = stopwords.words('russian')
 
@@ -68,7 +69,7 @@ def emotional_coloring(text):
         for j in i:
             strin_2 = strin_2 + " " + j
     """
-    strin_2 = ' '.join(test_text_3)
+    strin_2 = ' '.join(test_text_2)
     strin_2 = strin_2.strip()
     new_list = []
     new_list.append(strin_2)
