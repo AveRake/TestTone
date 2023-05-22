@@ -1,28 +1,19 @@
 import telebot
 from telebot import types
-
-bot = telebot.TeleBot('6288331035:AAHbLOrsOzsh461YLODeUg-RpG3rpgnYBBc')
-
 import pandas as pd
-data_reviews = pd.read_csv('C:/Users/мвм/Downloads/ext_for_ML.csv')
-data_reviews = data_reviews.drop(columns=["id"])
-
-
 import nltk
-nltk.download('punkt')
 import re
-#from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
-#import pymorphy2
-#from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
 
+bot = telebot.TeleBot('6288331035:AAHbLOrsOzsh461YLODeUg-RpG3rpgnYBBc')
 
-#lemmatize = nltk.WordNetLemmatizer()
-#morph = pymorphy2.MorphAnalyzer()
-#ru_stopwords = stopwords.words('russian')
+data_reviews = pd.read_csv('text_for_ML.csv')
+data_reviews = data_reviews.drop(columns=["id"])
+
+nltk.download('punkt')
 
 new_text = []
 for i in data_reviews.text:
@@ -31,8 +22,8 @@ for i in data_reviews.text:
     # токенизируем слова
     text = nltk.word_tokenize(text, language="russian")
     # лемматирзируем слова
-    #text = [word for word in text if (word not in ru_stopwords)]
-    #text = [morph.normal_forms(word) for word in text if (word not in ru_stopwords)]
+    # text = [word for word in text if (word not in ru_stopwords)]
+    # text = [morph.normal_forms(word) for word in text if (word not in ru_stopwords)]
     # соединяем слова
     strin = ' '.join(text)
     new_text.append(strin.strip())
@@ -44,25 +35,23 @@ for i in data_reviews.text:
     new_text.append(strin)
     """
 
-
 count = CountVectorizer()
 # проводим преобразование текста
 matrix = count.fit_transform(new_text).toarray()
 X = matrix
 y = data_reviews["target"].values
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 42)
-
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
 
 logreg = LogisticRegression()
 result_logreg = logreg.fit(x_train, y_train)
-print(logreg.score(x_test,y_test))
+print(logreg.score(x_test, y_test))
 
 
 def emotional_coloring(text):
-    test_text_1 = re.sub("[^a-zA-Zа-яА-Я]"," ", text)
-    test_text_2 = nltk.word_tokenize(test_text_1,language = "russian")
-    #test_text_3 = [word for word in test_text_2 if (word not in ru_stopwords)]
-    #test_text_3 = [morph.normal_forms(word) for word in test_text_2 if (word not in ru_stopwords)]
+    test_text_1 = re.sub("[^a-zA-Zа-яА-Я]", " ", text)
+    test_text_2 = nltk.word_tokenize(test_text_1, language="russian")
+    # test_text_3 = [word for word in test_text_2 if (word not in ru_stopwords)]
+    # test_text_3 = [morph.normal_forms(word) for word in test_text_2 if (word not in ru_stopwords)]
     """
     strin_2 = ""
     for i in test_text_3:
@@ -71,8 +60,7 @@ def emotional_coloring(text):
     """
     strin_2 = ' '.join(test_text_2)
     strin_2 = strin_2.strip()
-    new_list = []
-    new_list.append(strin_2)
+    new_list = [strin_2]
     new = count.transform(new_list).toarray()
     result = logreg.predict(new)
     if result[0] == 0:
