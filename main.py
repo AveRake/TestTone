@@ -6,9 +6,10 @@ import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from config import BOT_TOKEN
 
 
-bot = telebot.TeleBot('6288331035:AAHbLOrsOzsh461YLODeUg-RpG3rpgnYBBc')
+bot = telebot.TeleBot(BOT_TOKEN)
 
 data_reviews = pd.read_csv('text_for_ML.csv')
 data_reviews = data_reviews.drop(columns=["id"])
