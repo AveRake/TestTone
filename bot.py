@@ -25,11 +25,10 @@ def website(message):
 
 @bot.message_handler(content_types=['text'])
 def get_user_text(message):
-    result = model.emotional_coloring(message.text)
-    if result == "злой текст:(":
-        bot.send_message(message.chat.id, "Ваш текст отрицательного содержания", parse_mode='html')
-    else:
+    if model.is_emotionally_positive(message.text):
         bot.send_message(message.chat.id, "Ваш текст положительного содержания", parse_mode='html')
+    else:
+        bot.send_message(message.chat.id, "Ваш текст отрицательного содержания", parse_mode='html')
 
 
 bot.polling(none_stop=True)

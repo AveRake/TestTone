@@ -37,16 +37,12 @@ class Model:
         if self.verbose:
             print("ML model is ready!")
 
-    def emotional_coloring(self, text):
-        test_text_1 = re.sub("[^a-zA-Zа-яА-Я]", " ", text)
-        test_text_2 = nltk.word_tokenize(test_text_1, language="russian")
+    def is_emotionally_positive(self, text: str) -> bool:
+        text = re.sub("[^a-zA-Zа-яА-Я]", " ", text)
+        tokens = nltk.word_tokenize(text, language="russian")
 
-        string_2 = ' '.join(test_text_2)
-        string_2 = string_2.strip()
-        new_list = [string_2]
-        new = self.vectorizer.transform(new_list).toarray()
-        result = self.logreg.predict(new)
-        if result[0] == 0:
-            return "злой текст:("
-        elif result[0] == 1:
-            return "добрый текст:)"
+        token_string = ' '.join(tokens).strip()
+        vectorized = self.vectorizer.transform([token_string]).toarray()
+        result = self.logreg.predict(vectorized)
+
+        return bool(result[0])
