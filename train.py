@@ -58,7 +58,7 @@ class Trainer:
         if self.verbose:
             print("Training...")
 
-        logreg = LogisticRegression()
+        logreg = LogisticRegression(solver='liblinear', max_iter=1000)
         logreg = logreg.fit(self.x_train, self.y_train)
 
         if self.verbose:
