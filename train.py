@@ -5,10 +5,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-from config import DATASET_FILENAME, NLTK_DOWNLOAD_DIR
+from config import DATASET_FILENAME
 
 
-nltk.download('punkt', download_dir=NLTK_DOWNLOAD_DIR)
+nltk.download('punkt')
 
 
 class Trainer:
