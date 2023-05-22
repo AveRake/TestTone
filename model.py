@@ -40,8 +40,8 @@ class Model:
     def is_emotionally_positive(self, text: str) -> bool:
         text = re.sub("[^a-zA-Zа-яА-Я]", " ", text)
         tokens = nltk.word_tokenize(text, language="russian")
-
         token_string = ' '.join(tokens).strip()
+
         vectorized = self.vectorizer.transform([token_string]).toarray()
         result = self.logreg.predict(vectorized)
 

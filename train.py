@@ -5,10 +5,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-from config import DATASET_FILENAME
+from config import DATASET_FILENAME, NLTK_DOWNLOAD_DIR
 
 
-nltk.download('punkt')
+nltk.download('punkt', download_dir=NLTK_DOWNLOAD_DIR)
 
 
 class Trainer:
@@ -38,17 +38,18 @@ class Trainer:
 
         for i in self.data_reviews.text:
             text = re.sub("[^a-zA-Zа-яА-Я]", " ", i)  # удаляем неалфавитные символы
-            text = nltk.word_tokenize(text, language="russian")  # токенизируем слова
-            string = ' '.join(text)  # соединяем слова
-            self.prepared_data.append(string.strip())
+            tokens = nltk.word_tokenize(text, language="russian")  # токенизируем слова
+            token_string = ' '.join(tokens).strip()  # соединяем слова
+
+            self.prepared_data.append(token_string)
 
     def train_test_split(self):
         if self.verbose:
             print("Splitting dataset to train / test...")
 
         self.vectorizer = CountVectorizer()
-        # проводим преобразование текста
-        matrix = self.vectorizer.fit_transform(self.prepared_data).toarray()
+
+        matrix = self.vectorizer.fit_transform(self.prepared_data).toarray()  # проводим преобразование текста
         x = matrix
         y = self.data_reviews["target"].values
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(x, y, test_size=0.20, random_state=42)
