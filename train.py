@@ -10,7 +10,6 @@ from config import DATASET_FILENAME
 
 nltk.download('punkt')
 
-
 class Trainer:
     def __init__(self, verbose=True):
         self.verbose = verbose
